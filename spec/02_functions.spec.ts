@@ -74,9 +74,8 @@ describe('functions', () => {
     });
 
     describe('higher order functions', () => {
-        // a function that takes one or more arguments that are functions
-        // AND OR
-        // returns a function
+        // A function that takes one or more arguments that are functions and/or
+        // return a function
         it('the basic syntax', () => {
 
             type StringModifier = (msg: string) => string;
@@ -84,7 +83,7 @@ describe('functions', () => {
                 console.log(`At ${new Date().toISOString()}: ${f(message)}`);
             }
 
-            logItOut('Tacos!!', (s: string) => s.toUpperCase());
+            logItOut('Tacos', (s: string) => s.toUpperCase());
 
             function decorate(x: string) {
                 return `***${x}***`;
@@ -93,6 +92,53 @@ describe('functions', () => {
             logItOut('Burrito', decorate);
         });
 
+        describe('HOF that returns a function', () => {
+
+            it('with just a normal ', () => {
+                // <element>content</element>
+
+                function tagMaker(element: string, content: string) {
+                    return `<${element}>${content}</${element}>`;
+                }
+
+                expect(tagMaker('customer', 'Bob Smith')).toBe('<customer>Bob Smith</customer>');
+                expect(tagMaker('customer', 'Sue Jones')).toBe('<customer>Sue Jones</customer>');
+            });
+
+            it('oop version', () => {
+
+                class TagMaker {
+                    private element: string;
+
+                    constructor(element: string) {
+                        this.element = element;
+                    }
+
+                    make(content: string) {
+                        return `<${this.element}>${content}</${this.element}>`;
+                    }
+
+                }
+
+                const customerMaker = new TagMaker('customer');
+
+                expect(customerMaker.make('Bob Smith')).toBe('<customer>Bob Smith</customer>');
+
+
+            });
+
+            it('how a functional programmer would do it.', () => {
+
+                function tagMaker(element: string) {
+                    return (content: string) => `<${element}>${content}</${element}>`;
+                }
+
+                const customerMaker = tagMaker('customer');
+
+                expect(customerMaker('Bob Smith')).toBe('<customer>Bob Smith</customer>');
+            });
+
+        });
 
 
     });
