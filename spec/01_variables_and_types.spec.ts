@@ -257,4 +257,22 @@ describe('enums and union constants', () => {
 
         const mySeat: seatType = 'window';
     });
+
+    it('type assertions', () => {
+        let x: any;
+        x = 'Tacos';
+
+        // expect(x.howLong).toBe(5);
+
+        const y = x as string;
+
+        expect(y.length).toBe(5);
+
+        // tslint:disable-next-line: no-angle-bracket-type-assertion
+        const z = <string>x;
+
+        // tslint:disable-next-line: no-angle-bracket-type-assertion
+        expect((<string>x).length).toBe(5);
+
+    });
 });
