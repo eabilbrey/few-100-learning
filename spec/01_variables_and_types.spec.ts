@@ -161,6 +161,8 @@ describe('array destructuring and tuples', () => {
 
         warren = ['Warren', 'Ellis', 53];
 
+        name = 'Joey';
+
     });
 
     it('an oop example', () => {
